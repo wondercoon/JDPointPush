@@ -1,6 +1,7 @@
 name: Daily Push
   # This workflow is triggered on pushes to the repository.
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 6 * * *'
 
