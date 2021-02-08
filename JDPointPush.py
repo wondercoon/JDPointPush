@@ -1,16 +1,19 @@
 # coding=utf-8
 import requests
 import time
+import os
 
 # 京东API地址
 jd_base_url = "https://mobile-api.jdcloud.com/v1/regions/cn-north-1/"
 
 # Server酱 如 https://sc.ftqq.com/abc123456789.send
-server_chan_url = "https://sc.ftqq.com/填写你的Key.send"
+sckey = os.environ.get('SCKEY')
+server_chan_url = f"https://sc.ftqq.com/{sckey}.send"
 
 # 京东路由器设备列表,按照格式可填写多台
+mac = os.environ.get('MAC')
 jd_router_device_list = [
-    {"router_name": "京东无线路由宝", "router_mac": "AABBCCDDEEFF"}
+    {"router_name": "京东无线路由宝", "router_mac": mac}
 ]
 
 # 多台示例,MAC需要全部大写如 AABBCCDDEE11
@@ -24,7 +27,8 @@ jd_router_device_list = [
 
 # x-app-id 固定996
 headers = {
-    "wskey": "填写你京东无线宝的wskey",
+    # "wskey": "AAJenuRIAECBniASEE-Vg6MBbyOQkN5fJrmbOEE_BaA0MSgZIjz401HoH0mjdKm9GN7UFaL7aEgMYsyMEj61iCbDpB5M8KDS",
+    "wskey": os.environ.get('WSKEY'),
     "x-app-id": "996",
     "Content-Type": "application/json"
 }
@@ -34,6 +38,7 @@ is_auto_exchange = 0
 
 
 def send_message(title, desp):
+    print(title, desp)
     res = requests.get(url=server_chan_url, params={"text": title, "desp": desp})
     if res.status_code == 200:
         print("消息已推送!")
