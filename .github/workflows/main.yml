@@ -9,15 +9,15 @@ jobs:
   start:
     name: run and notify
     runs-on: ubuntu-latest
+    env:
+      SCKEY: ${{ secrets.sckey }}
+      WSKEY: ${{ secrets.wskey }}
+      MAC: ${{ secrets.mac }}
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: '3.8'
-      env:
-        SCKEY: ${{ secrets.sckey }}
-        WSKEY: ${{ secrets.wskey }}
-        MAC: ${{ secrets.mac }}
     - run: |
         env
         pip install requests
