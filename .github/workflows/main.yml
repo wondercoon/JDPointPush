@@ -18,4 +18,6 @@ jobs:
         SCKEY: ${{ secrets.sckey }}
         WSKEY: ${{ secrets.wskey }}
         MAC: ${{ secrets.mac }}
-    - run: python JDPointPush.py
+    - run: |
+        pip install requests
+        python JDPointPush.py
