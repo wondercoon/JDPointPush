@@ -19,5 +19,6 @@ jobs:
         WSKEY: ${{ secrets.wskey }}
         MAC: ${{ secrets.mac }}
     - run: |
+        env
         pip install requests
         python JDPointPush.py
