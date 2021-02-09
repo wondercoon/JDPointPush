@@ -1,6 +1,7 @@
 name: Daily Push
   # This workflow is triggered on pushes to the repository.
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 22 * * *'
 
@@ -8,13 +9,16 @@ jobs:
   start:
     name: run and notify
     runs-on: ubuntu-latest
+    env:
+      SCKEY: ${{ secrets.sckey }}
+      WSKEY: ${{ secrets.wskey }}
+      MAC: ${{ secrets.mac }}
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: '3.8'
-      env:
-        SCKEY: ${{ secrets.sckey }}
-        WSKEY: ${{ secrets.wskey }}
-        MAC: ${{ secrets.mac }}
-    - run: python JDPointPush.py
+    - run: |
+        env
+        pip install requests
+        python JDPointPush.py
