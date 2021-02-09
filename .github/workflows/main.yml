@@ -2,7 +2,7 @@ name: Daily Push
   # This workflow is triggered on pushes to the repository.
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 22 * * *'
 
 jobs:
   start:
